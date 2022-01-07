@@ -1,7 +1,9 @@
 <?php
-    // $bdd = new PDO('mysql:host=localhost;dbname=php_exam_db;charset=utf8', 'root', ''); -> methode de connexion plus simple
-    //création d'une class
-    class connexionDB{
+    //-> methode de connexion plus simple
+    // $BDD = new PDO("mysql:dbname=php_exam_db; host=localhost", "root", "");
+    
+    // création d'une class
+    class connexionDB {
         private $host   = 'localhost'; //nom de l'host
         private $name   = 'php_exam_db'; //nom de la bdd
         private $user   = 'root'; //users  
@@ -9,17 +11,17 @@
         private $connexion;
 
         //constructeur qui test de se connecter à la bdd
-        function construct($host = null, $name = null, $user = null, $pass = null){
+        function __construct($host = null, $name = null, $user = null, $pass = null){
             if($host != null){
-                $this ->host = $host;
-                $this ->name = $name;
-                $this ->user = $user;
-                $this ->pass = $pass;
+                $this->host = $host;
+                $this->name = $name;
+                $this->user = $user;
+                $this->pass = $pass;
             }
             try {
                 $this->connexion = new PDO('mysql:host=' . $this->host . ';dbname=' . $this->name,
-                    $this->user, $this->pass, array(PDO::MYSQL_ATTR_INIT_COMMAND =>'SET NAME UTF8MB4',
-                    PDO::ATTR_ERRMODE => PDO::ERRMODE_WARNING));
+                $this->user, $this->pass, array(PDO::MYSQL_ATTR_INIT_COMMAND =>'SET NAMES UTF8MB4',
+                PDO::ATTR_ERRMODE => PDO::ERRMODE_WARNING));
             }catch (PDOException $e){
                 echo 'Erreur : impossible de se connecter à la BDD ! ';
                 die();
