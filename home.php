@@ -1,3 +1,4 @@
+<a class="nav-link active " href="index.php">retour </a>
 <?php
     session_start();
     require_once 'inc\navbar_home.php';
@@ -15,7 +16,7 @@
 <body>
     <?php
       if(isset($_SESSION['ID_users'])){
-        echo "Bonjour" . $_SESSION['username'];
+        echo "Bonjour" . $_SESSION['mail'];
       }else{
     
     ?>

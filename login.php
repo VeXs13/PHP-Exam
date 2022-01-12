@@ -1,3 +1,4 @@
+<a class="nav-link active " href="index.php">retour </a>
 <?php
     session_start();
     include_once('db\connexionDB.php');//recall the connection file to the db
@@ -5,9 +6,10 @@
 
     if (!empty($_POST['email']) AND !empty($_POST['password'])) {
         //on recupere les champs
-        $email = htmlspecialchars($_POST['email']);
-        $psw = htmlspecialchars($_POST['password']);
 
+        $email = (String) htmlspecialchars(strtolower(trim($_POST['email'])));
+        $psw = (String) htmlspecialchars(trim($_POST['password']));
+        
         //on check si le username existe dans la database
         $checkUserExist = $BDD->prepare('SELECT * FROM users WHERE mail = ?');
         $checkUserExist->execute(array($email));
@@ -21,8 +23,6 @@
             if(password_verify($psw, $userInfos['passwords'])) {
                 //on transfert les infos dans une session
                 $_SESSION['ID_users'] = $userInfos["ID_users"];
-                $_SESSION['username'] = $userInfos["username"];
-                $_SESSION['passwords'] = $userInfos["passwords"];
                 $_SESSION['mail'] = $userInfos['mail'];
                 //on redirige vers le home
                 header('Location: /PHP-Exam');

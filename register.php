@@ -1,9 +1,11 @@
+<a class="nav-link active " href="index.php">retour </a>
+
 <?php
     session_start();
     include_once('db\connexionDB.php');//recall the connection file to the db
     require_once 'inc/header.php';
 
-    print_r($_POST); //allows to display an archi variable useful to see this post request in tab form
+    // print_r($_POST); //allows to display an archi variable useful to see this post request in tab form
 
 
     
@@ -22,7 +24,7 @@
                 $username = "veuillez renseignez ce champs !";
             }else{
                 //unique nickname verification
-                $req = $BDD->prepare("SELECT ID_users from users WHERE Username =?");
+                $req = $BDD->prepare("SELECT ID_users from users WHERE username =?");
                 $req->execute(array($username));
                 $verif_user = $req->fetch(); //fetch() method which allows a sequential reading of the result
 
@@ -30,16 +32,6 @@
                     $valid = false;
                     $err_username = "Ce pseudo existe déjà ! ";
                 }
-
-                // //valid pseudo address verification
-                // if(preg_match('`^([a-zA-Z0-9-_]{2,36})$`', $_POST['username'])){
-                //     echo 'ok';
-                //     $valid = false;
-                // }else{
-                //     $valid = false;
-                //     echo 'pas ok';
-                //     $err_username ='Pseudo incorrecte';
-                // }
   
             }
 
@@ -81,14 +73,7 @@
                 //B_crypt use
                 $hash = password_hash($password, PASSWORD_BCRYPT);
 
-                //password check
-                if (password_verify($password, $hash)){
-                    $PW_verify = "mot de passe correct";
-                }else{
-                    $PW_verify = "mot de passe incorrect";
-                }
-
-                $req = $BDD->prepare("INSERT INTO users (Username, passwords, mail) VALUES (?, ?, ?)"); //inject form in DB
+                $req = $BDD->prepare("INSERT INTO users (username, passwords, mail) VALUES (?, ?, ?)"); //inject form in DB
                 
                 $req->execute(array($username,$hash,$email));
 
@@ -101,6 +86,8 @@
     }
 
 ?>
+
+<h1>inscription</h1>
 
 <header>
     <form method="post">
