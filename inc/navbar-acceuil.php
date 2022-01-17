@@ -5,7 +5,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Bootstrap Example</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
@@ -17,7 +16,7 @@
 <nav class="navbar navbar-inverse">
   <div class="container-fluid">
     <div class="navbar-header">
-      <a class="navbar-brand" href="#">Forum | Ynov</a>
+      <a class="navbar-brand" href="index.php">Forum | Ynov</a>
     </div>
     <ul class="nav navbar-nav">
       <li class="active"><a href="#">Home</a></li>
@@ -34,7 +33,29 @@
     <?php
         if(isset($_SESSION['ID_users'])){
       ?>
-      <li><a href="logout.php"><span class="glyphicon glyphicon-log-in"></span> Log out</a></li>
+
+      <li>
+        <a ><span href=""class="glyphicon glyphicon-user" data-toggle="modal" data-target="#exampleModal">Profile</span></a>
+      </li>
+      <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Options</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                       </button>
+                      </div>
+                    <div class="modal-body">
+                      <li><a href="profil.php"><span class="glyphicon glyphicon-user"></span> Mon Profil</a></li>
+                      <br>
+                      <li><a href="edit_profil.php"><span class="glyphicon glyphicon-list-alt"></span> Editer mon profil</a></li>
+                      <br>
+                      <li><a href="logout.php"><span class="glyphicon glyphicon-log-out"></span> Log out</a></li>
+                    </div>
+                </div>
+              </div>
+            </div>
     <?php
       }else{
     ?>

@@ -21,7 +21,7 @@
             //username form verification
             if(empty($username)){
                 $valid = false;
-                $username = "veuillez renseignez ce champs !";
+                $err_username = "veuillez renseignez ce champs !";
             }else{
                 //unique nickname verification
                 $req = $BDD->prepare("SELECT ID_users from users WHERE username =?");
@@ -68,12 +68,12 @@
             }
 
             if($valid){
-                $date_inscription = date("Y-m-d"); //get the registration date, servira pour plus tard
+                // $date_inscription = date("Y-m-d"); //get the registration date, servira pour plus tard
 
                 //B_crypt use
                 $hash = password_hash($password, PASSWORD_BCRYPT);
 
-                $req = $BDD->prepare("INSERT INTO users (username, passwords, mail) VALUES (?, ?, ?)"); //inject form in DB
+                $req = $BDD->prepare("INSERT INTO users (Username, Password, mail) VALUES (?, ?, ?)"); //inject form in DB
                 
                 $req->execute(array($username,$hash,$email));
 
@@ -131,12 +131,3 @@
     <input type="submit" name="register" value="s'inscrire" class="btn btn-primary"></input>
     </form>
 </header>
-
-
-
-
-
-
-
-
-

@@ -8,7 +8,7 @@
         //on recupere les champs
 
         $email = (String) htmlspecialchars(strtolower(trim($_POST['email'])));
-        $psw = (String) htmlspecialchars(trim($_POST['password']));
+        $password = (String) htmlspecialchars(trim($_POST['password']));
         
         //on check si le username existe dans la database
         $checkUserExist = $BDD->prepare('SELECT * FROM users WHERE mail = ?');
@@ -18,12 +18,12 @@
         if($checkUserExist->rowCount() > 0){
 
             //on recup les infos du user 
-            $userInfos = $checkUserExist->fetch();
+            $verif_user = $checkUserExist->fetch();
             //on verifie si le mdp donner et mdp de la database sont pareil
-            if(password_verify($psw, $userInfos['passwords'])) {
+            if(password_verify($password, $verif_user['Password'])) {
                 //on transfert les infos dans une session
-                $_SESSION['ID_users'] = $userInfos["ID_users"];
-                $_SESSION['mail'] = $userInfos['mail'];
+                $_SESSION['ID_users'] = $verif_user["ID_users"];
+                $_SESSION['mail'] = $verif_user['mail'];
                 //on redirige vers le home
                 header('Location: /PHP-Exam');
 
