@@ -49,7 +49,7 @@
                     <div class="modal-body">
                       <li><a href="profil.php"><span class="glyphicon glyphicon-user"></span> Mon Profil</a></li>
                       <br>
-                      <li><a href="edit_profil.php"><span class="glyphicon glyphicon-list-alt"></span> Editer mon profil</a></li>
+                      <li><a href="modifier-profil.php"><span class="glyphicon glyphicon-list-alt"></span> Editer mon profil</a></li>
                       <br>
                       <li><a href="logout.php"><span class="glyphicon glyphicon-log-out"></span> Log out</a></li>
                     </div>
