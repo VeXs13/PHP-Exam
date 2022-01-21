@@ -21,6 +21,7 @@
         if (isset($_POST['modification'])){
             $pseudo = htmlentities(trim($pseudo));
             $mail = htmlentities(strtolower(trim($mail)));
+            $password = htmlentities(trim($password));
  
             if(empty($pseudo)){
                 $valid = false;
@@ -54,14 +55,22 @@
                     $er_mail = "Ce mail existe déjà";
                 }
             }
+
+            if(empty($password)){
+                $valid = false;
+                $err_password = "Il faut mettre un mot de passe";
+            }
  
             if ($valid){
+
+                $hash = password_hash($password, PASSWORD_BCRYPT);
  
-                $req = $BDD->prepare("UPDATE users SET username = ?, mail = ? WHERE ID_users = ?");
-                $req->execute(array($pseudo,$mail, $_SESSION['ID_users']));
+                $req = $BDD->prepare("UPDATE users SET username = ?, mail = ?, Password = ? WHERE ID_users = ?");
+                $req->execute(array($pseudo,$mail, $hash, $_SESSION['ID_users']));
 
                 $_SESSION['username'] = $pseudo;
                 $_SESSION['mail'] = $mail;
+                $_SESSION['Password'] = $hash;
  
                 header('Location:  profil.php');
                 exit;
@@ -86,13 +95,24 @@
                     echo $err_pseudo;
                 }
             ?>
+            <br>
             <input type="text" placeholder="Votre pseudo" name="pseudo" value="<?php if(isset($pseudo)){ echo $pseudo; }else{ echo $afficher_profil['Username'];}?>">
             <?php
                 if(isset($er_mail)){
                     echo $er_mail;
                 }
             ?>   
+            <br>
             <input type="email" placeholder="Adresse mail" name="mail" value="<?php if(isset($mail)){ echo $mail; }else{ echo $afficher_profil['mail'];}?>">
+
+            <?php
+                if(isset($er_mail)){
+                    echo $er_mail;
+                }
+            ?>   
+            <br>
+            <input type="password" placeholder="password" name="password" value="">
+
             <button type="submit" name="modification">Modifier</button>
         </form>
     </body>
