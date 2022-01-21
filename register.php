@@ -67,6 +67,11 @@
                 $err_password = "veuillez renseignez ce champs !";
             }
 
+            if($_POST['password'] != $_POST['check_password'] ){
+                $valid = false;
+                $err_password = "les mots de passe ne correspondes pas";
+            }
+
             if($valid){
                 // $date_inscription = date("Y-m-d"); //get the registration date, servira pour plus tard
 
@@ -116,11 +121,17 @@
         if(isset($err_password)){
             echo $err_password;
         }
-        // if(isset($PW_verify)){
-        //     echo $PW_verify;
-        // }
         ?>
         <input type="password" name="password"  placeholder="password" class="form-control" id="exampleInputPassword1">
+    </div>
+
+    <div class="mb-3">
+        <?php
+        if(isset($err_password)){
+            echo $err_password;
+        }
+        ?>
+        <input type="password" name="check_password"  placeholder="confirm_password" class="form-control" id="exampleInputPassword1">
     </div>
 
     <!-- sert à rien pour le moment -->

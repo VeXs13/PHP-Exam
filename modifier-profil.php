@@ -60,6 +60,13 @@
                 $valid = false;
                 $err_password = "Il faut mettre un mot de passe";
             }
+
+            if($_POST['password'] != $_POST['check_password'] ){
+                $valid = false;
+                $err_password = "les mots de passe ne correspondes pas";
+            }
+
+
  
             if ($valid){
 
@@ -88,7 +95,7 @@
         <title>Modifier votre profil</title>
     </head>
     <body>      
-        <div>Modification</div>
+        <h1>Modifier son profil</h1>
         <form method="post">
             <?php
                 if(isset($err_pseudo)){
@@ -106,12 +113,14 @@
             <input type="email" placeholder="Adresse mail" name="mail" value="<?php if(isset($mail)){ echo $mail; }else{ echo $afficher_profil['mail'];}?>">
 
             <?php
-                if(isset($er_mail)){
-                    echo $er_mail;
+                if(isset($err_password)){
+                    echo $err_password;
                 }
             ?>   
             <br>
             <input type="password" placeholder="password" name="password" value="">
+            <input type="password" placeholder="confirm_password" name="check_password" value="">
+
 
             <button type="submit" name="modification">Modifier</button>
         </form>
