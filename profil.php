@@ -1,3 +1,4 @@
+
 <?php
 
     session_start();
@@ -30,4 +31,7 @@
 
 <li> pseudo : <?= $show_user['Username'] ?> </li>
 <li> email : <?= $show_user['mail'] ?> </li>
+
+
+<a class="nav-link active " href="index.php">retour </a>
 

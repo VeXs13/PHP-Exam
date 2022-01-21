@@ -18,17 +18,25 @@
     <div class="navbar-header">
       <a class="navbar-brand" href="index.php">Forum | Ynov</a>
     </div>
+    <?php
+        if(isset($_SESSION['ID_users'])){
+      ?>
     <ul class="nav navbar-nav">
-      <li class="active"><a href="#">Home</a></li>
-      <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Page 1 <span class="caret"></span></a>
+      <li class=""><a href="index.php">Home</a></li>
+
+      <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Articles <span class="caret"></span></a>
         <ul class="dropdown-menu">
-          <li><a href="#">Page 1-1</a></li>
+          <li><a href="article.php">Crée un article</a></li>
           <li><a href="#">Page 1-2</a></li>
           <li><a href="#">Page 1-3</a></li>
         </ul>
       </li>
+
       <li><a href="#">Page 2</a></li>
     </ul>
+    <?php
+        }
+      ?>
     <ul class="nav navbar-nav navbar-right">
     <?php
         if(isset($_SESSION['ID_users'])){
@@ -70,7 +78,6 @@
   
 </body>
 </html>
-
 
 
 
