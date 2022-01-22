@@ -1,16 +1,35 @@
-
 <?php
 session_start();
 include_once('db\connexionDB.php');
-require_once 'inc\navbar-acceuil.php';
+require_once 'inc\navbar_home.php';
 
 if (!isset($_SESSION['ID_users'])){
     header('Location: index.php');
     exit;
 }
-?>
 
-<form class="container" method="PO ST">
+if(isset($_POST['validate'])){
+    if(!empty($_POST['title']) AND !empty($_POST['description']) AND !empty($_POST['content'])){
+        $title = htmlspecialchars($_POST['title']);
+        $descriptions = nl2br(htmlspecialchars($_POST['description']));
+        $contenu = nl2br(htmlspecialchars($_POST['content']));
+        $date = date("d/m/Y H:i");
+        $id_user = $_SESSION["ID_users"];
+        $pseudo = $_SESSION['Username'];
+
+        $insertArticles = $BDD->prepare("INSERT INTO articles(titre, description, contenu, id_auteur, pseudo_auteur, date_publication)VALUES(?, ?, ?, ?, ?, ?)");
+        $insertArticles->execute(array($title, $descriptions, $contenu, $id_user, $pseudo, $date));
+
+        $sucessPublish = "<script>alert('your article is now published !')</script>";
+
+    } else {
+        $errorMsg = "<script>alert('Please complete all fields...')</script>";
+    }
+}
+?>
+<br>
+<h1>Creation d'un article</h1> <br>
+<form class="container" method="post">
 
 <?php 
             if(isset($errorMsg)){ 
@@ -21,64 +40,21 @@ if (!isset($_SESSION['ID_users'])){
         ?>
         
 <div class="mb-3">
-            <label for="exampleInputEmail1" class="form-label">Titre de la question</label>
+            <label for="exampleInputEmail1" class="form-label">Titre de l'article</label>
             <input type="text" class="form-control" name="title">
         </div>
         <div class="mb-3">
-            <label for="exampleInputEmail1" class="form-label">Description de la question</label>
+            <label for="exampleInputEmail1" class="form-label">Description de l'article</label>
             <textarea class="form-control" name="description"></textarea>
         </div>
         <div class="mb-3">
-            <label for="exampleInputEmail1" class="form-label">Contenu de la question</label>
+            <label for="exampleInputEmail1" class="form-label">Contenu de l'article'</label>
             <textarea type="text" class="form-control" name="content"></textarea>
         </div>
 
-        <button type="submit" class="btn btn-primary" name="validate">Publier la question</button>
+        <button type="submit" class="btn btn-primary" name="validate">Publier l'article</button>
 </form>
 <a class="nav-link active " href="index.php">retour </a>
-
-<?php
-
-if(isset($_POST['validate'])){
-
-    //Vérifier si les champs ne sont pas vides
-    if(!empty($_POST['title']) AND !empty($_POST['description']) AND !empty($_POST['content'])){
-        
-        //Les données de la question
-        $question_title = htmlspecialchars($_POST['title']);
-        $question_description = nl2br(htmlspecialchars($_POST['description']));
-        $question_content = nl2br(htmlspecialchars($_POST['content']));
-        $question_date = date('d/m/Y');
-        $question_id_author = $_SESSION['ID_users'];
-
-        //Insérer la question sur la question
-        $insertQuestionOnWebsite = $BDD->prepare("INSERT INTO questions(titre, description, contenu, id_auteur, date_publication)VALUES(?, ?, ?, ?, ?)");
-        $insertQuestionOnWebsite->execute(
-            array(
-                $question_title, 
-                $question_description, 
-                $question_content, 
-                $question_id_author,
-                $question_date
-            )
-        );
-        
-        $successMsg = "Votre question a bien été publiée sur le site";
-        
-    }else{
-        $errorMsg = "Veuillez compléter tous les champs...";
-    }
-
-}
-
-
-
-
-
-
-
-
-?>
 
 <?php
 require_once 'inc\footer.php';

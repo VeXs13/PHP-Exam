@@ -1,4 +1,5 @@
 <?php
+// require_once 'inc/header.php';
 session_start();
 include_once('db\connexionDB.php');
 require_once 'inc\navbar_home.php';
@@ -15,40 +16,21 @@ if(!empty($_SESSION['ID_users'])){
 
 
 }
+
+
 ?>
 
 
-<br>
+
 <h3> 
 <?php
 
   if(isset($_SESSION['ID_users'])){
     echo "Bienvenue " . $show_user['Username'];
-    $getarticles = $BDD->query('SELECT * FROM articles ORDER BY id DESC ');
-    while($a = $getarticles->fetch()){ 
-
-?>
-
-<div class="card text-center">
-  <div class="card-header">
-  auteur : <?= $a['pseudo_auteur'] ?>
-  </div>
-  <div class="card-body">
-    <h2 class="card-title"><?= $a['titre'] ?></h2>
-    <h5><p class="card-text"><?= $a['description'] ?></p></h5>
-    <a href="#" class="btn btn-outline-primary btn-sm">Voir l'article</a>
-  </div>
-  <div class="card-footer text-muted">
-      <h6><?= $a['date_publication'] ?></h6>
-  </div>
-</div>
-
-  <?php
-  }}else{
+  }else{
 
 ?>
 </h3>
-
 
 <div class="container">
   <h3>voici notre forum</h3>
@@ -57,4 +39,32 @@ if(!empty($_SESSION['ID_users'])){
 
 <?php
   }
+?>
+
+<?php
+    while($a = $getarticles->fetch()){ 
+?>
+
+<div class="card text-center">
+  <div class="card-header">
+    <?= $a['pseudo_auteur'] ?>
+  </div>
+  <div class="card-body">
+    <h5 class="card-title"><?= $a['titre'] ?></h5>
+    <p class="card-text"><?= $a['description'] ?></p>
+    <a href="#" class="btn btn-primary">Go somewhere</a>
+  </div>
+  <div class="card-footer text-muted">
+      <?= $a['date_publication'] ?>
+  </div>
+</div>
+
+<?php
+    }
+?>
+
+
+
+
+<?php
 ?>

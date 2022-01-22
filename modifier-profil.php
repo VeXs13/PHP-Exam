@@ -59,7 +59,7 @@
 
             if(empty($password)){
                 $valid = false;
-                $err_password = "Il faut mettre un mot de passe";
+                $err_password = "Veuillez comfirmer votre mot de passe !";
             }
 
             if($_POST['password'] != $_POST['check_password'] ){

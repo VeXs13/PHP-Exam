@@ -82,6 +82,12 @@
                 
                 $req->execute(array($username,$hash,$email));
 
+                $userInfos = $req->fetch();
+                $_SESSION['auth'] = true;
+                $_SESSION['ID'] = $userInfos["ID_users"];
+                $_SESSION['username'] = $userInfos["username"];
+                $_SESSION['mail'] = $userInfos['mail'];
+
                 header('Location: /PHP-Exam/'); //redirection after registration
                 exit;
             }

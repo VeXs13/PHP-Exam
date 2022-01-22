@@ -22,8 +22,10 @@
             //on verifie si le mdp donner et mdp de la database sont pareil
             if(password_verify($password, $verif_user['Password'])) {
                 //on transfert les infos dans une session
+                $_SESSION['auth'] = true;
                 $_SESSION['ID_users'] = $verif_user["ID_users"];
                 $_SESSION['mail'] = $verif_user['mail'];
+                $_SESSION['Username'] = $verif_user['Username'];
                 //on redirige vers le home
                 header('Location: /PHP-Exam');
 

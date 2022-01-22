@@ -4,7 +4,7 @@
     session_start();
 
     include_once('db\connexionDB.php');
-    require_once 'inc\navbar-acceuil.php';
+    require_once 'inc\navbar_home.php';
 
     if(!isset($_SESSION['ID_users'])){
         header('Location: /PHP-Exam');
