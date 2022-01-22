@@ -16,10 +16,10 @@
     <!-- fontawesome -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
 
-    <title>Home</title>
   </head>
 <body>
 
+<!-- <title>Home</title> -->
 <nav class="navbar  navbar-expand-lg navbar-dark bg-dark">
   <a class="navbar-brand" href="index.php">Forum | Ynov</a>
     <?php
@@ -90,8 +90,8 @@
             ?>
             </ul>
             <form class="form-inline my-2 my-lg-0">
-            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                <input name="search" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
             </form>
 
         </div>
