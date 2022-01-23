@@ -4,54 +4,44 @@ include_once('db\connexionDB.php');
 require_once 'inc\navbar_home.php';
 require_once 'system\get_all_articles.php';
 
-
-// if(!empty($_SESSION['ID_users'])){
-//   $user_id = (int) $_SESSION['ID_users']; 
-//   $req = $BDD->prepare("SELECT Username from users WHERE ID_users = ?");
-//   $req->execute(array($user_id));
-//   $show_user = $req->fetch();
-// }
 ?>
 
+<?php
+if (isset($_SESSION['ID_users'])){
 
+?>
+<h1> Bienvenue <?=$_SESSION['Username']; ?></h1>
 <br>
-<h3> 
 <?php
+    while($articles = $allArticles->fetch()){
+?>
+    <div class="card text-center">
+    <div class="card-header">
+        <h2><?= $articles['titre'] ?></h2>
+    </div>
+    <div class="card-body">
+        <h4><p class="card-text">description : <?= $articles['description']; ?></p></h4>
+        <a href="voir_article.php?id=<?php echo $articles['id']; ?>" class="btn btn-outline-primary btn-sm" >Voir l'article</a>
+    </div>
+    <div class="card-footer text-muted">
+        <h7><?= $articles['date_publication'] ?> by <?= $articles['pseudo_auteur'] ?> </h7>
+    </div>
+    </div>
+    <br><br>
 
-  // if(isset($_SESSION['ID_users'])){
-  //   echo "Bienvenue " . $show_user['Username'];
-  //   $getarticles = $BDD->query('SELECT * FROM articles ORDER BY id DESC ');
-  //   while($a = $getarticles->fetch()){ 
+<?php
+    }}else{
+?>
+    <div class="container">
+        <h3>voici notre forum</h3>
+        <p>foncez vous connecter pour le tester !!!</p> 
+    </div>
 
+<?php
+    }
 ?>
 
-<?php
-        while($articles = $allArticles->fetch()){
-            ?>
-                <div class="container">
-                    <div class="card">
-                        <div class="card-title bg-info">
-                            <a href="voir_article.php?id=<?php echo $articles['id']; ?>">
-                                <?= $articles['titre']; ?>
-                            </a>
 
-                        </div>
-                        <div class="card-header">
-                            description : <?= $articles['description']; ?>
-                        </div>
-                        <div class="card-body">
-                        <?= $articles['contenu']; ?>
-                        </div>
-                        <div class="card-footer">
-                            Published by <a href="profil.php?ID=<?= $articles['id_auteur'];?>"><?= $articles['pseudo_auteur']; ?></a> at <?= $articles['date_publication']; ?>
-                        </div>
-                    </div>
-                </div>
-                <br>
-            <?php
-        }
-
-    ?>
 
 
 
