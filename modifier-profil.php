@@ -1,9 +1,10 @@
-<a class="nav-link active " href="index.php">retour </a>
+
 <?php
-    session_start()
-    ;
+    session_start();
 
     include_once('db\connexionDB.php');
+    require_once 'inc\navbar_profil.php';
+    require_once 'system\photo_de_profil.php';
  
     if (!isset($_SESSION['ID_users'])){
         header('Location: index.php');
@@ -87,6 +88,7 @@
     }
     
 ?>
+<a class="nav-link active " href="profil.php">retour </a>
 
 <!DOCTYPE html>
 <html lang="fr">
@@ -98,7 +100,7 @@
     </head>
     <body>      
         <h1>Modifier son profil</h1>
-        <form method="post">
+        <form method="post" enctype="multipart/form-data">
             <?php
                 if(isset($err_pseudo)){
                     echo $err_pseudo;
@@ -122,9 +124,19 @@
             <br>
             <input type="password" placeholder="password" name="password" value="">
             <input type="password" placeholder="confirm_password" name="check_password" value="">
+            <br>
+            <br>
+            <div class="mb-3">
+            <?php
+                if(isset($errorMsg)){
+                    echo "<p>".$errorMsg."</p>";
+                }
+            ?>   
+                <label for="exampleInputPassword1" class="form-label">changer photo de profile : </label>
+                <input type="file" class="form-control" name="avatar" ><br>
+            </div>
 
-
-            <button type="submit" name="modification">Modifier</button>
+            <button type="submit" name="modification" class="btn btn-outline-success">Modifier</button>
         </form>
     </body>
 </html>

@@ -1,7 +1,7 @@
 <?php
 session_start();
 include_once('db\connexionDB.php');
-require_once 'inc\navbar_home.php';
+require_once 'inc\navbar_profil.php';
 
 if (!isset($_SESSION['ID_users'])){
     header('Location: index.php');

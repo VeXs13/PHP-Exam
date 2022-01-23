@@ -7,6 +7,7 @@
     require_once 'inc\navbar_profil.php';
     require_once 'system\get_profil_articles.php';
     require_once 'system\get_all_articles.php';
+    require_once 'system\photo_de_profil.php';
 
 
     if(!isset($_SESSION['ID_users'])){
@@ -59,11 +60,29 @@
 <title>Profil de <?= $show_user['Username'] ?> </title>
     
 <h3> profil de : <?=$show_user['Username']?> </h3>
+<br>
 
 <h4> information : </h4>
 
 <li> pseudo : <?= $show_user['Username'] ?> </li>
 <li> email : <?= $show_user['mail'] ?> </li>
+<br>
+<?php
+    if (!empty($show_user['avatar'])) {
+?>
+    <img src="system\pp_img/<?php echo $show_user['avatar'];?>" width="150" >
+<?php
+    } else {
+?>
+    <img src="system\pp_img\default.png" width="150" >
+<?php
+    }
+?>
+
+<a href="modifier-profil.php">
+<button type="button" class="btn btn-secondary">Modifier le profile</button>
+</a>
+<br>
 <br>
 
 <?php
