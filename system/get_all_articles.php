@@ -7,8 +7,6 @@ include_once('db\connexionDB.php');
         $searching = $_GET['search'];
         $allArticles = $BDD->query('SELECT id, id_auteur, titre, description, contenu, pseudo_auteur, date_publication FROM articles WHERE titre LIKE "%'.$searching.'%" ORDER BY id DESC');
 
-
-
     }
 
 
