@@ -30,7 +30,7 @@
 
                 if(isset($verif_user['ID_users'])){
                     $valid = false;
-                    $err_username = "<script> alert('Ce pseudo existe déjà !') </script> ";
+                    $err_username = "Ce pseudo existe déjà !";
                 }
   
             }
@@ -51,11 +51,9 @@
                 }
 
                 //valid email address verification
-                if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
-                    $valid = true;
-                } else {
+                if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+                    $valid = false;
                     $err_email = "Veuillez rentrer une adresse mail valide";
-                    $valid =false;
                 }
 
 
@@ -84,7 +82,7 @@
                 $_SESSION['username'] = $userInfos["username"];
                 $_SESSION['mail'] = $userInfos['mail'];
 
-                header('Location: /PHP-Exam/'); //redirection after registration
+                header('Location: login.php'); //redirection after registration
                 exit;
             }
 
@@ -105,7 +103,7 @@
             if(isset($err_username)){
                 echo $err_username;
             }
-        ?>
+        ?>  
         <input type="text" name="username" placeholder="pseudo" class="form-control" value="<?php if(isset($username)){echo $username; }?>">
     </div>
     <!-- email form    -->

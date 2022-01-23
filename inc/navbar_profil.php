@@ -35,6 +35,10 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
 
+            <li class="nav-item active">
+                <a class="nav-link" href="index.php">Home <span class="sr-only"></span></a>
+            </li> 
+
             <?php
                 if(isset($_SESSION['ID_users'])){
             ?>
@@ -63,6 +67,7 @@
                     </div>
                 </div>
 
+ 
 
                 <!-- cree un article -->
             <li class="nav-item active">

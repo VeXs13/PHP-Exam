@@ -35,6 +35,11 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
 
+
+            <li class="nav-item active">
+                <a class="nav-link" href="index.php">Home <span class="sr-only"></span></a>
+            </li>  
+
             <?php
                 if(isset($_SESSION['ID_users'])){
             ?>
@@ -64,6 +69,7 @@
                 </div>
 
 
+
                 <!-- cree un article -->
             <li class="nav-item active">
                 <a class="nav-link" href="article.php">Crée un article <span class="sr-only"></span></a>
@@ -73,6 +79,8 @@
             <li class=" nav-item active ">
                 <a class="nav-link" href="#">Article Favorie<span class="sr-only"></span></a>
             </li>
+
+
             
             <?php
                 }else{
@@ -84,7 +92,9 @@
                 <!-- se connecter -->
                 <li class="nav-item active">
                     <a class="nav-link" href="login.php">login <span class="sr-only"></span></a>
-                </li>                
+                </li>  
+
+              
 
             <?php 
                 }
